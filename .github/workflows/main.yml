@@ -28,7 +28,7 @@ jobs:
         uses: databricks/setup-cli@main
     
       - name: Extract branch name
-        id: extract_branch_prod
+        id: extract_branch
         run: echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
 
       - name: Update Databricks Repo (Dev)
@@ -39,7 +39,7 @@ jobs:
   deploy-prod:
         needs: deploy-dev
         runs-on: ubuntu-latest
-        environment: development
+        environment: production
         env:
           DATABRICKS_HOST: ${{ secrets.  PROD_DEPLOYMENT_TARGET_URL }}
           DATABRICKS_TOKEN: ${{ secrets. PROD_DEPLOYMENT_TARGET_TOKEN }}
